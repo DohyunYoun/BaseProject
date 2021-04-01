@@ -2,7 +2,7 @@ name: Issue
 
 on:
   issues:
-    types: [opened, edited]
+    types: [opened]
 
 jobs:
   add_label:
@@ -20,5 +20,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: [mlabel]
+              labels: [title]
             })
