@@ -5,7 +5,7 @@ on:
     types: [opened, edited]
 
 jobs:
-  add_labels:
+  add_label:
     runs-on: ubuntu-latest
     steps:
       - name: add label on issue
@@ -15,7 +15,7 @@ jobs:
           script: |
             var title = context.issue.title
             var mlabel = '보류'
-            if(title.startsWith('[Feature]') mlabel = 'Feature'
+            if(startsWith(title,'[Feature]') mlabel = 'Feature'
 
             github.issues.addLabels({
               issue_number: context.issue.number,
