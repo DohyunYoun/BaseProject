@@ -2,7 +2,7 @@ name: Issue
 
 on:
   issues:
-    types: [opened]
+    types: [opened, edited]
 
 jobs:
   add_label:
@@ -13,7 +13,7 @@ jobs:
         with:
           github-token: ${{secrets.MY_GITHUB_ACTION_TOKEN}}
           script: |
-            var title = context.issue.title
+            var title = context.payload.issue.title
             var mlabel = '보류'
 
             github.issues.addLabels({
