@@ -1,0 +1,29 @@
+name: Issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add_label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: add label on issue
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.MY_GITHUB_ACTION_TOKEN}}
+          script: |
+            var title = context.payload.issue.title
+            var mlabel = '보류'
+            switch(startsWith(title)){
+              case '[Feature]':
+               mlabel='Feature'
+               break;
+            }
+
+            github.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: [mlabel]
+            })
